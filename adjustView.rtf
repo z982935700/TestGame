@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg936\cocoartf1265\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset134 STHeitiSC-Light;}
+{\colortbl;\red255\green255\blue255;\red170\green13\blue145;\red63\green110\blue116;\red0\green116\blue0;
+\red38\green71\blue75;\red28\green0\blue207;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab963
+\pard\tx963\pardeftab963\pardirnatural
+
+\f0\fs40 \cf2 \CocoaLigature0 void\cf0  \cf3 HelloWorld\cf0 ::adjustView()\cf4 //
+\f1 \'bd\'f8\'d0\'d0\'ce\'bb\'d6\'c3\'b5\'f7\'d5\'fb
+\f0 \cf0 \
+\{\
+    \cf3 ScrollView\cf0  *view = (\cf3 ScrollView\cf0  *)\cf2 this\cf0 ->\cf5 getChildByTag\cf0 (\cf6 101\cf0 );\cf4 //
+\f1 \'bb\'f1\'b5\'c3\'b9\'f6\'b6\'af\'ca\'d3\'cd\'bc
+\f0 \cf0 \
+    view->\cf5 unscheduleAllCallbacks\cf0 ();\
+    \cf2 int\cf0  x = view->\cf5 getContentOffset\cf0 ().\cf3 x\cf0 ;\cf4 //
+\f1 \'d5\'fb\'b8\'f6\'d2\'c6\'b6\'af\'b5\'c4\'be\'e0\'c0\'eb
+\f0 \cf0 \
+    \cf2 float\cf0  offsetX = x%\cf6 480\cf0 ;\cf4 //
+\f1 \'b8\'ba\'d6\'b5
+\f0 \cf0 \
+    \cf3 Point\cf0  adjustPos;\
+    \cf2 float\cf0  adjustTime;\
+    \cf2 if\cf0  (offsetX < -\cf6 240\cf0 )\cf4 //-260\cf0 \
+    \{\
+        \cf4 //
+\f1 \'cf\'f2\'d3\'d2\'d2\'c6\'b6\'af\'c1\'cb\'d2\'bb\'b5\'e3\'b5\'e3\'a3\'ac\'bb\'f2\'cf\'f2\'d7\'f3\'d2\'c6\'b6\'af\'c1\'cb\'d2\'bb\'b4\'f3\'b0\'eb
+\f0 \cf0 \
+        adjustPos = view->\cf5 getContentOffset\cf0 () - \cf3 Vec2\cf0 (\cf6 480\cf0 +offsetX, \cf6 0\cf0 );\cf4 //
+\f1 \'d2\'aa\'d7\'f3\'d2\'c6\'b6\'af\'b5\'c4\'ce\'bb\'d6\'c3
+\f0 \cf0 \
+        \cf2 float\cf0  distance = \cf6 480\cf0 +offsetX;\
+        adjustTime = distance/\cf6 400\cf0 ;\
+        \
+    \}\
+    \cf2 else\cf0  \cf2 if\cf0 (offsetX>-\cf6 240\cf0  && offsetX< \cf6 0\cf0 )\
+    \{\
+        \cf4 //
+\f1 \'cf\'f2\'d7\'f3\'d2\'c6\'b6\'af\'d2\'bb\'b5\'e3\'a3\'ac\'bb\'f2\'cf\'f2\'d3\'d2\'d2\'c6\'b6\'af\'d2\'bb\'b4\'f3\'b0\'eb
+\f0 \cf0 \
+        adjustPos = view->\cf5 getContentOffset\cf0 ()-\cf3 Vec2\cf0 (offsetX,\cf6 0\cf0 );\
+        \cf2 float\cf0  distance = -offsetX;\
+        adjustTime = distance/\cf6 400\cf0 ;\
+    \}\
+    \cf2 else\cf0  \cf2 if\cf0 (offsetX> \cf6 0\cf0 )\
+    \{\
+        adjustPos = \cf3 Vec2\cf0 (\cf6 0\cf0 ,\cf6 0\cf0 );\
+        \cf2 float\cf0  distance = offsetX;\
+        adjustTime = distance/\cf6 400\cf0 ;\
+\
+    \}\
+    \cf2 else\cf0 \
+    \{\
+        \cf2 return\cf0 ;\
+    \}\
+    \
+    view->\cf5 setContentOffsetInDuration\cf0 (adjustPos, adjustTime);\
+\}}
